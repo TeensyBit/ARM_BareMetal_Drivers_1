@@ -136,4 +136,12 @@ typedef struct
 #define GPIOJ_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 9))
 #define GPIOK_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 10))
 
+//SPI Peripheral Clock Enable
+#define SPI1_EN()	((RCC->RCC_APB2ENR) |= (1U<<12))
+#define SPI2_EN()   ((RCC->RCC_APB1ENR) |= (1U << 14))
+#define SPI3_EN()   ((RCC->RCC_APB1ENR) |= (1U << 15))
+#define SPI1_DI()	((RCC->RCC_APB2ENR) &= ~(1U<<12))
+#define SPI2_DI()   ((RCC->RCC_APB1ENR) &= ~(1U << 14))
+#define SPI3_DI()   ((RCC->RCC_APB1ENR) &= ~(1U << 15))
+
 #endif /* INC_STM32F407XX_H_ */

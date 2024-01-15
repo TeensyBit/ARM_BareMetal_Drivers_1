@@ -74,16 +74,27 @@ typedef struct
 
 //API Prototypes
 /*
- * Peripheral Control
- * GPIO Init
- * GPIO DeInit
+ * GPIO_PCLK_Ctrl: This API enables/disables the peripheral clock for respective GPIO Port
+ * GPIO_Init
+ * GPIO_DeInit
  * GPIO_IPinRead
  * GPIO_PortRead
  * GPIO_OPinWrite
  * GPIO_OPortWrite
- * GPIO_ToggleOPin
+ * GPIO_ToggleOPins
  */
-void GPIO_PClkCtrl(void);
 
+//EN_DI
+#define EN	1
+#define DI	0
+
+void GPIO_PCLK_Ctrl(GPIOx_RegDef_t *pGPIOx, uint8_t EN_DI);
+void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle);
+void GPIO_DeInit(void);
+uint8_t GPIO_IPinRead(uint8_t PinNumber);
+uint16_t GPIO_PortRead(void);
+void GPIO_OPinWrite(uint8_t PinNumber, uint8_t Value);
+void GPIO_OPortWrite(uint16_t Value);
+void GPIO_ToggleOPins(uint8_t PinNumber);
 
 #endif /* INC_STM32F407XX_GPIO_DRIVER_H_ */

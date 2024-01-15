@@ -2,7 +2,7 @@
  * stm32f407xx.h
  *
  *  Created on: Jan 15, 2024
- *      Author: a1c2c
+ *      Author: TeensyDev
  */
 
 #ifndef INC_STM32F407XX_H_
@@ -140,6 +140,7 @@ typedef struct
 #define SPI1_EN()	((RCC->RCC_APB2ENR) |= (1U<<12))
 #define SPI2_EN()   ((RCC->RCC_APB1ENR) |= (1U << 14))
 #define SPI3_EN()   ((RCC->RCC_APB1ENR) |= (1U << 15))
+//SPI Peripheral Clock Disable
 #define SPI1_DI()	((RCC->RCC_APB2ENR) &= ~(1U<<12))
 #define SPI2_DI()   ((RCC->RCC_APB1ENR) &= ~(1U << 14))
 #define SPI3_DI()   ((RCC->RCC_APB1ENR) &= ~(1U << 15))

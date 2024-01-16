@@ -8,6 +8,9 @@
 #ifndef INC_STM32F407XX_H_
 #define INC_STM32F407XX_H_
 
+#include <stdint.h>
+#include <stddef.h>
+
 /*
  * Base addresses of different memories
  * Base addresses of AHBx and APBx
@@ -56,8 +59,7 @@ typedef struct
 	__vo uint32_t GPIOx_ODR;
 	__vo uint32_t GPIOx_BSRR;
 	__vo uint32_t GPIOx_LCKR;
-	__vo uint32_t GPIOx_AFRL;
-	__vo uint32_t GPIOx_AFRH;
+	__vo uint32_t GPIOx_AFR[2];
 }GPIOx_RegDef_t;
 
 //GPIOx_RegDef_t *pGPIOx = (GPIOx_RegDef_t*)GPIOx_BASEADDR
@@ -108,11 +110,11 @@ typedef struct
 	__vo uint32_t RCC_PLLI2SCFGR;
 }RCC_RegDef_t;
 
-#define RCC		(RCC_RegDef_t*)RCC_BASEADDR
+#define RCC		((RCC_RegDef_t*)RCC_BASEADDR)
 
 //GPIO Peripheral Clock Enables
-#define GPIOA_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 0))
-#define GPIOB_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 1))
+#define GPIOA_PCLK_EN()	  (RCC->RCC_AHB1ENR |= (1U << 0))
+#define GPIOB_PCLK_EN()	  (RCC->RCC_AHB1ENR |= (1U << 1))
 #define GPIOC_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 2))
 #define GPIOD_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 3))
 #define GPIOE_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 4))
@@ -124,7 +126,7 @@ typedef struct
 #define GPIOK_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 10))
 
 //GPIO Peripheral Clock Disable
-#define GPIOA_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 0))
+#define GPIOA_PCLK_DI()   (RCC->RCC_AHB1ENR &= ~(1U << 0))
 #define GPIOB_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 1))
 #define GPIOC_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 2))
 #define GPIOD_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 3))

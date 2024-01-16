@@ -48,4 +48,23 @@
 	 Eg: GPIO_AF<0> 
 	 ```
 ## Initialising GPIO Pins with the selected configuration
-	GPIO_Init(&<Handler>)
+	GPIO_Init(&<Handle>)
+ 	Eg: GPIO_Init(&gpio)
+## De-Initialising GPIO 
+	GPIO_DeInit(<Handle>.pGPIOx)
+	Eg: GPIO(gpio.pGPIOx)
+## Output GPIO Pin Write
+ 	GPIO_OPinWrite(<Handle>.pGPIOx, GPIO_P<0_15>, <HIGH/LOW>)
+	Eg: GPIO_OPinWrite(gpio.pGPIOx, GPIO_P0, HIGH)
+## Output GPIO Port Write
+ 	GPIO_OPortWrite(<Handle>.pGPIOx, <uint16_t data>)
+	Eg: GPIO_OPortWrite(gpio.pGPIOx, 0x1)
+## Toggle GPIO Pin
+ 	GPIO_ToggleOPin(GPIO<A_K>,GPIO_P<0_15>)
+	Eg: GPIO_ToggleOPin(GPIOA, GPIO_P0)
+## Input GPIO Pin
+	GPIO_IPinRead(<Handle>.pGPIOx, GPIO_P<0_15>)
+ 	Eg: GPIO_IPinRead(gpio.pGPIOx, GPIO_P1)
+## Input GPIO Port
+	uint16_t <var> = GPIO_IPortRead(GPIO<A_K>, GPIO_P<0_15>)
+ 	uint16_t in = GPIO_IPortRead(GPIOA, GPIO_P0)

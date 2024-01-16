@@ -112,10 +112,10 @@ typedef struct
 void GPIO_PCLK_Ctrl(GPIOx_RegDef_t *pGPIOx, uint8_t EN_DI);
 void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle);
 void GPIO_DeInit(GPIOx_RegDef_t *pGPIOx);
-uint8_t GPIO_IPinRead(uint8_t PinNumber);
-uint16_t GPIO_PortRead(void);
+uint8_t GPIO_IPinRead(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber);
+uint16_t GPIO_IPortRead(GPIOx_RegDef_t *pGPIOx);
 void GPIO_OPinWrite(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t value);
-void GPIO_OPortWrite(uint16_t Value);
-void GPIO_ToggleOPins(uint8_t PinNumber);
+void GPIO_OPortWrite(GPIOx_RegDef_t *pGPIOx, uint16_t value);
+void GPIO_ToggleOPin(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber);
 
 #endif /* INC_STM32F407XX_GPIO_DRIVER_H_ */

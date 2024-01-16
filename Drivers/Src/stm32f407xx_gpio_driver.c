@@ -135,3 +135,76 @@ void GPIO_OPinWrite(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t value)
 	pGPIOx->GPIOx_ODR &= ~(1<<PinNumber);
 	pGPIOx->GPIOx_ODR |= (value<<PinNumber);
 }
+
+//	API Implementation
+/*
+ * 	@function				: GPIO_OPortWrite
+ * 	@info					: Write to Output Port
+ *
+ * 	@param[in]_datatypes	: GPIO_RegDef_t*, uint16_t
+ * 	@param[in] variables	: GPIOx_RegDef_t *pGPIOx, uint16_t value
+ *
+ * 	@return					: void
+ *
+ * 	@notes					: API for setting the pins HIGH/LOW
+ */
+
+void GPIO_OPortWrite(GPIOx_RegDef_t *pGPIOx, uint16_t value)
+{
+	pGPIOx->GPIOx_ODR = value;
+}
+
+//	API Implementation
+/*
+ * 	@function				: GPIO_OPortWrite
+ * 	@info					: Write to Output Port
+ *
+ * 	@param[in]_datatypes	: GPIO_RegDef_t*, uint16_t
+ * 	@param[in] variables	: GPIOx_RegDef_t *pGPIOx, uint16_t value
+ *
+ * 	@return					: void
+ *
+ * 	@notes					: API for setting the pins HIGH/LOW
+ */
+
+void GPIO_ToggleOPin(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber)
+{
+	pGPIOx->GPIOx_ODR ^= (1<<PinNumber);
+}
+
+//	API Implementation
+/*
+ * 	@function				: GPIO_IPinRead
+ * 	@info					: Read Port pin
+ *
+ * 	@param[in]_datatypes	: GPIO_RegDef_t*, uint8_t
+ * 	@param[in] variables	: GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber
+ *
+ * 	@return					: void
+ *
+ * 	@notes					: API for reading the port pin
+ */
+
+uint8_t GPIO_IPinRead(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber)
+{
+	return (pGPIOx->GPIOx_IDR) & (1<<PinNumber);
+}
+
+
+//	API Implementation
+/*
+ * 	@function				: GPIO_IPortRead
+ * 	@info					: Read Port pin
+ *
+ * 	@param[in]_datatypes	: GPIO_RegDef_t*
+ * 	@param[in] variables	: GPIOx_RegDef_t *pGPIOx
+ *
+ * 	@return					: void
+ *
+ * 	@notes					: API for reading the port pin
+ */
+
+uint16_t GPIO_IPortRead(GPIOx_RegDef_t *pGPIOx)
+{
+	return (pGPIOx->GPIOx_IDR);
+}

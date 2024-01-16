@@ -116,3 +116,22 @@ void GPIO_DeInit(GPIOx_RegDef_t* pGPIOx)
 	else if (pGPIOx == GPIOH) GPIO_RST(7);
 	else if (pGPIOx == GPIOI) GPIO_RST(8);
 }
+
+//	API Implementation
+/*
+ * 	@function				: GPIO_OPinWrite
+ * 	@info					: Write to Output Pin
+ *
+ * 	@param[in]_datatypes	: GPIO_RegDef_t*, uint8_t, uint8_t
+ * 	@param[in] variables	: GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t Value
+ *
+ * 	@return					: void
+ *
+ * 	@notes					: API for setting the pins HIGH/LOW
+ */
+
+void GPIO_OPinWrite(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t value)
+{
+	pGPIOx->GPIOx_ODR &= ~(1<<PinNumber);
+	pGPIOx->GPIOx_ODR |= (value<<PinNumber);
+}

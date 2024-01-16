@@ -114,7 +114,7 @@ void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle);
 void GPIO_DeInit(GPIOx_RegDef_t *pGPIOx);
 uint8_t GPIO_IPinRead(uint8_t PinNumber);
 uint16_t GPIO_PortRead(void);
-void GPIO_OPinWrite(uint8_t PinNumber, uint8_t Value);
+void GPIO_OPinWrite(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t value);
 void GPIO_OPortWrite(uint16_t Value);
 void GPIO_ToggleOPins(uint8_t PinNumber);
 

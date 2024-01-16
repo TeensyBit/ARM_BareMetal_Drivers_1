@@ -127,4 +127,7 @@ typedef struct
 #define SPI2_DI()   ((RCC->RCC_APB1ENR) &= ~(1U << 14))
 #define SPI3_DI()   ((RCC->RCC_APB1ENR) &= ~(1U << 15))
 
+#define HIGH		1
+#define LOW			0
+
 #endif /* INC_STM32F407XX_H_ */

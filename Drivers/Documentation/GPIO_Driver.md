@@ -11,7 +11,7 @@
 ## Enabling Peripheral Clock for the corresponding GPIO
 	GPIO_PCLK_Ctrl(<Handle>.pGPIOx)
 ### Example: 
-	GPIO_PCLK_Ctrl(gpio.pGPIOx)
+	GPIO_PCLK_Ctrl(gpio.pGPIOA)
 
 ## Configuring the GPIO pins: 
 	<Handle>.GPIO_PinConfig.GPIO_<Config> = <Configuration>

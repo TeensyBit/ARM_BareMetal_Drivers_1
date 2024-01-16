@@ -47,3 +47,5 @@
 	 GPIO_AF<0_15>
 	 Eg: GPIO_AF<0> 
 	 ```
+## Initialising GPIO Pins with the selected configuration
+	GPIO_Init(&<Handler>)

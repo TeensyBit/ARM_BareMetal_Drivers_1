@@ -56,14 +56,14 @@ void GPIO_PCLK_Ctrl(GPIOx_RegDef_t *pGPIOx, uint8_t EN_DI)
 //	API Implementation
 /*
  * 	@function				: GPIO_Init
- * 	@info					: Peripheral Clock Control
+ * 	@info					: Configure the GPIO as required
  *
- * 	@param[in]_datatypes	: GPIO_RegDef_t, uint8_t
- * 	@param[in] variables	: GPIO_RegDef_t *pGPIOx, uint8_t EN_DI
+ * 	@param[in]_datatypes	: GPIOx_Handler_t*
+ * 	@param[in] variables	: GPIOx_Handler_t* pGPIOx_Handle
  *
  * 	@return					: void
  *
- * 	@notes					: API for enabling and disabling the clock
+ * 	@notes					: API configuring the GPIO Pins
  */
 
 void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle)
@@ -91,4 +91,28 @@ void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle)
 	pGPIOx_Handle->pGPIOx->GPIOx_AFR[L_H] &= ~(((temp->GPIO_PinAF)%8)<<(4*(temp->GPIO_PinNo)));
 }
 
+//	API Implementation
+/*
+ * 	@function				: GPIO_DeInit
+ * 	@info					: De-Initialize GPIO
+ *
+ * 	@param[in]_datatypes	: GPIO_RegDef_t*
+ * 	@param[in] variables	: GPIO_RegDef_t *pGPIOx
+ *
+ * 	@return					: void
+ *
+ * 	@notes					: API for enabling and disabling the clock
+ */
 
+void GPIO_DeInit(GPIOx_RegDef_t* pGPIOx)
+{
+	if (pGPIOx == GPIOA) GPIO_RST(0);
+	else if (pGPIOx == GPIOB) GPIO_RST(1);
+	else if (pGPIOx == GPIOC) GPIO_RST(2);
+	else if (pGPIOx == GPIOD) GPIO_RST(3);
+	else if (pGPIOx == GPIOE) GPIO_RST(4);
+	else if (pGPIOx == GPIOF) GPIO_RST(5);
+	else if (pGPIOx == GPIOG) GPIO_RST(6);
+	else if (pGPIOx == GPIOH) GPIO_RST(7);
+	else if (pGPIOx == GPIOI) GPIO_RST(8);
+}

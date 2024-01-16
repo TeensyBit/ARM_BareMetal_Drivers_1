@@ -72,6 +72,9 @@
 #define AF14		14
 #define AF15		15
 
+//Reset GPIO Pins
+#define GPIO_RST(i)	do{RCC->RCC_AHB1RSTR |= (1<<i); RCC->RCC_AHB1RSTR &= ~(1<<i);}while(0)
+
 //GPIO API PinConfiguration
 typedef struct
 {
@@ -108,7 +111,7 @@ typedef struct
 
 void GPIO_PCLK_Ctrl(GPIOx_RegDef_t *pGPIOx, uint8_t EN_DI);
 void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle);
-void GPIO_DeInit(void);
+void GPIO_DeInit(GPIOx_RegDef_t *pGPIOx);
 uint8_t GPIO_IPinRead(uint8_t PinNumber);
 uint16_t GPIO_PortRead(void);
 void GPIO_OPinWrite(uint8_t PinNumber, uint8_t Value);

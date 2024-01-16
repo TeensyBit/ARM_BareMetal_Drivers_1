@@ -113,30 +113,10 @@ typedef struct
 #define RCC		((RCC_RegDef_t*)RCC_BASEADDR)
 
 //GPIO Peripheral Clock Enables
-#define GPIOA_PCLK_EN()	  (RCC->RCC_AHB1ENR |= (1U << 0))
-#define GPIOB_PCLK_EN()	  (RCC->RCC_AHB1ENR |= (1U << 1))
-#define GPIOC_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 2))
-#define GPIOD_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 3))
-#define GPIOE_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 4))
-#define GPIOF_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 5))
-#define GPIOG_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 6))
-#define GPIOH_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 7))
-#define GPIOI_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 8))
-#define GPIOJ_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 9))
-#define GPIOK_PCLK_EN()	  ((RCC->RCC_AHB1ENR) |= (1U << 10))
+#define GPIO_PCLK_EN(i)	  (RCC->RCC_AHB1ENR |= (1U << i))
 
 //GPIO Peripheral Clock Disable
-#define GPIOA_PCLK_DI()   (RCC->RCC_AHB1ENR &= ~(1U << 0))
-#define GPIOB_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 1))
-#define GPIOC_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 2))
-#define GPIOD_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 3))
-#define GPIOE_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 4))
-#define GPIOF_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 5))
-#define GPIOG_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 6))
-#define GPIOH_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 7))
-#define GPIOI_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 8))
-#define GPIOJ_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 9))
-#define GPIOK_PCLK_DI()   ((RCC->RCC_AHB1ENR) &= ~(1U << 10))
+#define GPIO_PCLK_DI(i)   (RCC->RCC_AHB1ENR &= ~(1U << i))
 
 //SPI Peripheral Clock Enable
 #define SPI1_EN()	((RCC->RCC_APB2ENR) |= (1U<<12))

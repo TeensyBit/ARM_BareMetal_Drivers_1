@@ -25,31 +25,31 @@ void GPIO_PCLK_Ctrl(GPIOx_RegDef_t *pGPIOx, uint8_t EN_DI)
 {
 	if(EN_DI == EN)
 	{
-		if (pGPIOx == GPIOA) GPIOA_PCLK_EN();
-		else if (pGPIOx == GPIOB) GPIOB_PCLK_EN();
-		else if (pGPIOx == GPIOC) GPIOC_PCLK_EN();
-		else if (pGPIOx == GPIOD) GPIOD_PCLK_EN();
-		else if (pGPIOx == GPIOE) GPIOE_PCLK_EN();
-		else if (pGPIOx == GPIOF) GPIOF_PCLK_EN();
-		else if (pGPIOx == GPIOG) GPIOG_PCLK_EN();
-		else if (pGPIOx == GPIOH) GPIOH_PCLK_EN();
-		else if (pGPIOx == GPIOI) GPIOI_PCLK_EN();
-		else if (pGPIOx == GPIOJ) GPIOJ_PCLK_EN();
-		else if (pGPIOx == GPIOK) GPIOK_PCLK_EN();
+		if (pGPIOx == GPIOA) GPIO_PCLK_EN(0);
+		else if (pGPIOx == GPIOB) GPIO_PCLK_EN(1);
+		else if (pGPIOx == GPIOC) GPIO_PCLK_EN(2);
+		else if (pGPIOx == GPIOD) GPIO_PCLK_EN(3);
+		else if (pGPIOx == GPIOE) GPIO_PCLK_EN(4);
+		else if (pGPIOx == GPIOF) GPIO_PCLK_EN(5);
+		else if (pGPIOx == GPIOG) GPIO_PCLK_EN(6);
+		else if (pGPIOx == GPIOH) GPIO_PCLK_EN(7);
+		else if (pGPIOx == GPIOI) GPIO_PCLK_EN(8);
+		else if (pGPIOx == GPIOJ) GPIO_PCLK_EN(9);
+		else if (pGPIOx == GPIOK) GPIO_PCLK_EN(10);
 	}
 	else if(EN_DI == DI)
 	{
-		if (pGPIOx == GPIOA) GPIOA_PCLK_DI();
-		else if (pGPIOx == GPIOB) GPIOB_PCLK_DI();
-		else if (pGPIOx == GPIOC) GPIOC_PCLK_DI();
-		else if (pGPIOx == GPIOD) GPIOD_PCLK_DI();
-		else if (pGPIOx == GPIOE) GPIOE_PCLK_DI();
-		else if (pGPIOx == GPIOF) GPIOF_PCLK_DI();
-		else if (pGPIOx == GPIOG) GPIOG_PCLK_DI();
-		else if (pGPIOx == GPIOH) GPIOH_PCLK_DI();
-		else if (pGPIOx == GPIOI) GPIOI_PCLK_DI();
-		else if (pGPIOx == GPIOJ) GPIOJ_PCLK_DI();
-		else if (pGPIOx == GPIOK) GPIOK_PCLK_DI();
+		if (pGPIOx == GPIOA) GPIO_PCLK_DI(0);
+		else if (pGPIOx == GPIOB) GPIO_PCLK_DI(1);
+		else if (pGPIOx == GPIOC) GPIO_PCLK_DI(2);
+		else if (pGPIOx == GPIOD) GPIO_PCLK_DI(3);
+		else if (pGPIOx == GPIOE) GPIO_PCLK_DI(4);
+		else if (pGPIOx == GPIOF) GPIO_PCLK_DI(5);
+		else if (pGPIOx == GPIOG) GPIO_PCLK_DI(6);
+		else if (pGPIOx == GPIOH) GPIO_PCLK_DI(7);
+		else if (pGPIOx == GPIOI) GPIO_PCLK_DI(8);
+		else if (pGPIOx == GPIOJ) GPIO_PCLK_DI(9);
+		else if (pGPIOx == GPIOK) GPIO_PCLK_DI(10);
 	}
 }
 

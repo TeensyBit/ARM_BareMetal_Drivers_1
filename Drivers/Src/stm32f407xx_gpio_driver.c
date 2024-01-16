@@ -85,8 +85,10 @@ void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle)
 	pGPIOx_Handle->pGPIOx->GPIOx_PUPDR &= ~(0x3<<(2*(temp->GPIO_PinNo)));
 	pGPIOx_Handle->pGPIOx->GPIOx_PUPDR |= ((temp->GPIO_PinPUPD)<<(2*(temp->GPIO_PinNo)));
 
-	//PinMode Alternate Function - AF0
+	//PinMode Alternate Function - AF0_15
 	uint8_t L_H = (temp->GPIO_PinNo)/8;
 	pGPIOx_Handle->pGPIOx->GPIOx_AFR[L_H] &= ~(0xF<<(4*(temp->GPIO_PinNo)));
-	pGPIOx_Handle->pGPIOx->GPIOx_AFR[L_H] &= ~(((temp->GPIO_PinNo)%8)<<(4*(temp->GPIO_PinNo)));
+	pGPIOx_Handle->pGPIOx->GPIOx_AFR[L_H] &= ~(((temp->GPIO_PinAF)%8)<<(4*(temp->GPIO_PinNo)));
 }
+
+

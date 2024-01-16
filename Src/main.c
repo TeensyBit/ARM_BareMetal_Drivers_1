@@ -18,14 +18,23 @@
 
 #include <stdint.h>
 
-#include <stm32f407xx.h>
-
-#if !defined(__SOFT_FP__) && defined(__ARM_FP)
-  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
-#endif
+#include "stm32f407xx.h"
+#include "stm32f407xx_gpio_driver.h"
 
 int main(void)
 {
-    /* Loop forever */
+	GPIOx_Handler_t gpio;
+	gpio.pGPIOx = GPIOA;
+
+	GPIO_PCLK_Ctrl(gpio.pGPIOx, EN);
+
+	GPIO_PinConfig_t* temp = &(gpio.GPIO_PinConfig);
+	temp->GPIO_PinNo = GPIO_P1;
+	temp->GPIO_PinMode = GPIO_OUT;
+	temp->GPIO_PinModeOType = GPIO_OD;
+	temp->GPIO_PinOSpeed = GPIO_VHIGH;
+	temp->GPIO_PinPUPD = GPIO_PD;
+
+	GPIO_Init(&gpio);
 	for(;;);
 }

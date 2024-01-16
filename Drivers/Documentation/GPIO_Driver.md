@@ -16,7 +16,7 @@
 ## Configuring the GPIO pins: 
 	<Handle>.GPIO_PinConfig.GPIO_<Config> = <Configuration>
 
- ## Available Configuration:
+ ## Available Configurations:
 1. ```GPIO_PinNo``` 
 	```  
 	 GPIO_P<0_15>

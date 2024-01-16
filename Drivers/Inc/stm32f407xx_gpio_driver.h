@@ -13,7 +13,6 @@
  * -> Pin Config
  */
 
-#include <stdint.h>
 #include "stm32f407xx.h"
 
 //GPIO_PinNo
@@ -62,6 +61,7 @@ typedef struct
 	uint8_t GPIO_PinMode;
 	uint8_t GPIO_PinModeOType;
 	uint8_t GPIO_PinOSpeed;
+	uint8_t GPIO_PinPUPD;
 	uint8_t GPIO_PinAltFunc;
 }GPIO_PinConfig_t;
 

@@ -47,7 +47,9 @@
 #define GPIOK_BASEADDR  (AHB1_BASEADDR + 0x2800)
 
 //RCC Base Address on AHB1
-#define RCC_BASEADDR	(AHB1_BASEADDR+0x3800)
+#define RCC_BASEADDR		(AHB1_BASEADDR+0x3800)
+#define SYSCFG_BASEADDR		(APB2_BASEADDR+0x3800)
+#define EXTI_BASEADDR		(APB2_BASEADDR+0x3C00)
 
 typedef struct
 {
@@ -110,7 +112,37 @@ typedef struct
 	__vo uint32_t RCC_PLLI2SCFGR;
 }RCC_RegDef_t;
 
+//RCC Macro
 #define RCC		((RCC_RegDef_t*)RCC_BASEADDR)
+
+//SYSCFG Register Structure
+typedef struct
+{
+	__vo uint32_t SYSCFG_MEMRMPl;
+	__vo uint32_t SYSCFG_PMC;
+	__vo uint32_t SYSCFG_EXTICR1;
+	__vo uint32_t SYSCFG_EXTICR2;
+	__vo uint32_t SYSCFG_EXTICR3;
+	__vo uint32_t SYSCFG_EXTICR4;
+	__vo uint32_t SYSCFG_CMPCR;
+}SYSCFG_RegDef_t;
+
+//SYSCFG Macro
+#define SYSCFG	((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
+
+//EXTI Register Structure
+typedef struct
+{
+	__vo uint32_t EXTI_IMR;
+	__vo uint32_t EXTI_EMR;
+	__vo uint32_t EXTI_RTSR;
+	__vo uint32_t EXTI_FTSR;
+	__vo uint32_t EXTI_SWIER;
+	__vo uint32_t EXTI_PR;
+}EXTI_RegDef_t;
+
+//EXTI Macro
+#define EXTI ((EXTI_RegDef_t*)EXTI_BASEADDR)
 
 //GPIO Peripheral Clock Enables
 #define GPIO_PCLK_EN(i)	  (RCC->RCC_AHB1ENR |= (1U << i))

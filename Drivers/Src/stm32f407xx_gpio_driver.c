@@ -69,9 +69,41 @@ void GPIO_PCLK_Ctrl(GPIOx_RegDef_t *pGPIOx, uint8_t EN_DI)
 void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle)
 {
 	GPIO_PinConfig_t *temp =  &(pGPIOx_Handle->GPIO_PinConfig);
-	//Setting PinMode - Input/Output/AlternateFunc/Analog
-	pGPIOx_Handle->pGPIOx->GPIOx_MODER &= ~(0x3<<(2*(temp->GPIO_PinNo)));					//Clear corresponding bits in the MODER Register
-	pGPIOx_Handle->pGPIOx->GPIOx_MODER |= (temp->GPIO_PinMode<<(2*(temp->GPIO_PinNo)));		//Set the corresponding bits in the MODER Register
+	if((temp->GPIO_PinMode)<=GPIO_AN)
+	{
+		//Setting PinMode - Input/Output/AlternateFunc/Analog
+		pGPIOx_Handle->pGPIOx->GPIOx_MODER &= ~(0x3<<(2*(temp->GPIO_PinNo)));					//Clear corresponding bits in the MODER Register
+		pGPIOx_Handle->pGPIOx->GPIOx_MODER |= (temp->GPIO_PinMode<<(2*(temp->GPIO_PinNo)));		//Set the corresponding bits in the MODER Register
+	}
+	else
+	{
+		/*
+		 * To generate the interrupt, the interrupt line should be configured and enabled.
+		 * This is done by programming the two trigger registers with the desired edge detection
+		 * Enable the interrupt request by writing a ‘1’ to the corresponding bit in the IMR
+		 */
+
+		if((temp->GPIO_PinMode)==GPIO_IT_RT)
+		{
+			(EXTI->EXTI_RTSR) &= ~(1<<(temp->GPIO_PinNo));
+			(EXTI->EXTI_RTSR) |= (1<<(temp->GPIO_PinNo));
+		}
+		else if((temp->GPIO_PinMode)==GPIO_IT_FT)
+		{
+			(EXTI->EXTI_FTSR) &= ~(1<<(temp->GPIO_PinNo));
+			(EXTI->EXTI_FTSR) |= (1<<(temp->GPIO_PinNo));
+		}
+		else if((temp->GPIO_PinMode)==GPIO_IT_RFT)
+		{
+			(EXTI->EXTI_RTSR) &= ~(1<<(temp->GPIO_PinNo));
+			(EXTI->EXTI_RTSR) |= (1<<(temp->GPIO_PinNo));
+			(EXTI->EXTI_FTSR) &= ~(1<<(temp->GPIO_PinNo));
+			(EXTI->EXTI_FTSR) |= (1<<(temp->GPIO_PinNo));
+		}
+
+		//EXTI_IMR
+		EXTI->EXTI_IMR &= ~(1<<(temp->GPIO_PinNo));		//Clear the corresponding IMR bit
+		EXTI->EXTI_IMR |= (1<<(temp->GPIO_PinNo));		//Clear the corresponding IMR bit}
 
 	//PinMode Output type - Output Push-Pull/Output Open-Drain
 	pGPIOx_Handle->pGPIOx->GPIOx_OTYPER &= ~(0x1<<(temp->GPIO_PinNo));
@@ -207,4 +239,21 @@ uint8_t GPIO_IPinRead(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber)
 uint16_t GPIO_IPortRead(GPIOx_RegDef_t *pGPIOx)
 {
 	return (pGPIOx->GPIOx_IDR);
+}
+
+//	API Implementation
+/*
+ * 	@function				: GPIO_IRQConfig
+ * 	@info					: Configure interrupts for the requested GPIO Pin
+ *
+ * 	@param[in]_datatypes	: GPIO_RegDef_t*
+ * 	@param[in] variables	: GPIOx_RegDef_t *pGPIOx
+ *
+ * 	@return					: void
+ *
+ * 	@notes					: API for reading the port pin
+ */
+void GPIO_IRQConfig(GPIOx_RegDef_t	*pGPIOx, uint8_t PinNumber)
+{
+
 }

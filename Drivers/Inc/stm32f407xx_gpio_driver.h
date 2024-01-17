@@ -34,10 +34,13 @@
 #define GPIO_P15 15
 
 //GPIO_Mode
-#define GPIO_IN		0		//Input
-#define GPIO_OUT	1		//Output
-#define GPIO_AF		2		//Alternate functions
-#define GPIO_AN		3		//Analog
+#define GPIO_IN			0		//Input
+#define GPIO_OUT		1		//Output
+#define GPIO_AF			2		//Alternate functions
+#define GPIO_AN			3		//Analog
+#define GPIO_IT_RT		4		//Interrupt Rising Edge
+#define GPIO_IT_FT		5		//Interrupt Falling Edge
+#define GPIO_TR_RFT		6		//Interrupt Rising/Falling Edge
 
 //GPIO_OSPEED
 #define GPIO_LOW		0
@@ -117,5 +120,7 @@ uint16_t GPIO_IPortRead(GPIOx_RegDef_t *pGPIOx);
 void GPIO_OPinWrite(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t value);
 void GPIO_OPortWrite(GPIOx_RegDef_t *pGPIOx, uint16_t value);
 void GPIO_ToggleOPin(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber);
+void GPIO_IRQConfig(GPIOx_RegDef_t	*pGPIOx, uint8_t PinNumber);
+void GPIO_IRQHandle(void);
 
 #endif /* INC_STM32F407XX_GPIO_DRIVER_H_ */

@@ -33,6 +33,24 @@
 #define AHB2_BASEADDR	0x50000000U
 #define AHB3_BASEADDR	0xA0000000U
 
+//Processor NVIC_ISER Register definitions
+#define NVIC_ISER_BASEADDR	0xE000E100
+#define NVIC_ISER_PTR		((uint32_t*)NVIC_ISER_BASEADDR)
+#define NVIC_ISER(IRQ_No)	(NVIC_ISER_PTR+(IRQ_No/32))				//Example for IRQ 32, NVIC ISER will return NVIC_ISER1
+//Processor NVIC_ICER Register definitions
+#define NVIC_ICER_BASEADDR	0xE000E180
+#define NVIC_ICER_PTR		((uint32_t*)0XE000E180)
+#define NVIC_ICER(IRQ_No)	(NVIC_ICER_PTR+(IRQ_No/32))
+
+//IRQ Numbers
+#define IRQNo_EXTI0     6
+#define IRQNo_EXTI1     7
+#define IRQNo_EXTI2     8
+#define IRQNo_EXTI3     9
+#define IRQNo_EXTI4     10
+#define IRQNo_EXTI5_9   23   // EXTI5 to EXTI9 share the same IRQ number
+#define IRQNo_EXTI10_15 40   // EXTI10 to EXTI15 share the same IRQ number
+
 //GPIO Base Addresses on AHB1
 #define GPIOA_BASEADDR	AHB1_BASEADDR
 #define GPIOB_BASEADDR 	(AHB1_BASEADDR+0x0400)
@@ -163,5 +181,7 @@ typedef struct
 
 #define HIGH		1
 #define LOW			0
+
+uint8_t returnGPIO_IRQNum(uint8_t PinNo);
 
 #endif /* INC_STM32F407XX_H_ */

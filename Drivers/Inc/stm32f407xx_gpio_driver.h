@@ -120,7 +120,7 @@ uint16_t GPIO_IPortRead(GPIOx_RegDef_t *pGPIOx);
 void GPIO_OPinWrite(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t value);
 void GPIO_OPortWrite(GPIOx_RegDef_t *pGPIOx, uint16_t value);
 void GPIO_ToggleOPin(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber);
-void GPIO_IRQConfig(GPIOx_RegDef_t	*pGPIOx, uint8_t PinNumber);
+void GPIO_IRQConfig(uint8_t IRQ_Number, uint8_t EN_DI);
 void GPIO_IRQHandle(void);
 
 uint8_t PortCode(GPIOx_RegDef_t *pGPIOx);

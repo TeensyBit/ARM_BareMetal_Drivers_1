@@ -100,11 +100,19 @@ void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle)
 			(EXTI->EXTI_FTSR) &= ~(1<<(temp->GPIO_PinNo));
 			(EXTI->EXTI_FTSR) |= (1<<(temp->GPIO_PinNo));
 		}
-
 		//EXTI_IMR
 		EXTI->EXTI_IMR &= ~(1<<(temp->GPIO_PinNo));		//Clear the corresponding IMR bit
 		EXTI->EXTI_IMR |= (1<<(temp->GPIO_PinNo));		//Clear the corresponding IMR bit}
 
+		SYSCFG_PCLK_EN();
+		*(SYSCFG->SYSCFG_EXTICR+((temp->GPIO_PinNo)/4)) &= ~(PortCode(pGPIOx_Handle->pGPIOx)<<(((temp->GPIO_PinNo)%4)*4));
+		*(SYSCFG->SYSCFG_EXTICR+((temp->GPIO_PinNo)/4)) |= (PortCode(pGPIOx_Handle->pGPIOx)<<(((temp->GPIO_PinNo)%4)*4));
+
+		/* Same as writing:
+		  SYSCFG->SYSCFG_EXTICR[((temp->GPIO_PinNo)/4)] &= ~(PortCode(pGPIOx_Handle->pGPIOx)<<(((temp->GPIO_PinNo)%4)*4));
+		  SYSCFG->SYSCFG_EXTICR[((temp->GPIO_PinNo)/4)] |= (PortCode(pGPIOx_Handle->pGPIOx)<<(((temp->GPIO_PinNo)%4)*4));
+		 */
+	}
 	//PinMode Output type - Output Push-Pull/Output Open-Drain
 	pGPIOx_Handle->pGPIOx->GPIOx_OTYPER &= ~(0x1<<(temp->GPIO_PinNo));
 	pGPIOx_Handle->pGPIOx->GPIOx_OTYPER |= ((temp->GPIO_PinModeOType)<<(temp->GPIO_PinNo));
@@ -121,6 +129,21 @@ void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle)
 	uint8_t L_H = (temp->GPIO_PinNo)/8;
 	pGPIOx_Handle->pGPIOx->GPIOx_AFR[L_H] &= ~(0xF<<(4*(temp->GPIO_PinNo)));
 	pGPIOx_Handle->pGPIOx->GPIOx_AFR[L_H] &= ~(((temp->GPIO_PinAF)%8)<<(4*(temp->GPIO_PinNo)));
+}
+
+uint8_t PortCode(GPIOx_RegDef_t *pGPIOx)
+{
+	return ((pGPIOx == GPIOA)? 0 : \
+	        (pGPIOx == GPIOB)? 1 : \
+	        (pGPIOx == GPIOC)? 2 : \
+	        (pGPIOx == GPIOD)? 3 : \
+	        (pGPIOx == GPIOE)? 4 : \
+	        (pGPIOx == GPIOF)? 5 : \
+	        (pGPIOx == GPIOG)? 6 : \
+	        (pGPIOx == GPIOH)? 7 : \
+	        (pGPIOx == GPIOI)? 8 : \
+	        (pGPIOx == GPIOJ)? 9 : \
+	        (pGPIOx == GPIOK)? 10 : 0);
 }
 
 //	API Implementation
@@ -241,19 +264,3 @@ uint16_t GPIO_IPortRead(GPIOx_RegDef_t *pGPIOx)
 	return (pGPIOx->GPIOx_IDR);
 }
 
-//	API Implementation
-/*
- * 	@function				: GPIO_IRQConfig
- * 	@info					: Configure interrupts for the requested GPIO Pin
- *
- * 	@param[in]_datatypes	: GPIO_RegDef_t*
- * 	@param[in] variables	: GPIOx_RegDef_t *pGPIOx
- *
- * 	@return					: void
- *
- * 	@notes					: API for reading the port pin
- */
-void GPIO_IRQConfig(GPIOx_RegDef_t	*pGPIOx, uint8_t PinNumber)
-{
-
-}

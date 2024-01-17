@@ -40,7 +40,7 @@
 #define GPIO_AN			3		//Analog
 #define GPIO_IT_RT		4		//Interrupt Rising Edge
 #define GPIO_IT_FT		5		//Interrupt Falling Edge
-#define GPIO_TR_RFT		6		//Interrupt Rising/Falling Edge
+#define GPIO_IT_RFT		6		//Interrupt Rising/Falling Edge
 
 //GPIO_OSPEED
 #define GPIO_LOW		0
@@ -122,5 +122,7 @@ void GPIO_OPortWrite(GPIOx_RegDef_t *pGPIOx, uint16_t value);
 void GPIO_ToggleOPin(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber);
 void GPIO_IRQConfig(GPIOx_RegDef_t	*pGPIOx, uint8_t PinNumber);
 void GPIO_IRQHandle(void);
+
+uint8_t PortCode(GPIOx_RegDef_t *pGPIOx);
 
 #endif /* INC_STM32F407XX_GPIO_DRIVER_H_ */

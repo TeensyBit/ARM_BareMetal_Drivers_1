@@ -120,10 +120,7 @@ typedef struct
 {
 	__vo uint32_t SYSCFG_MEMRMPl;
 	__vo uint32_t SYSCFG_PMC;
-	__vo uint32_t SYSCFG_EXTICR1;
-	__vo uint32_t SYSCFG_EXTICR2;
-	__vo uint32_t SYSCFG_EXTICR3;
-	__vo uint32_t SYSCFG_EXTICR4;
+	__vo uint32_t SYSCFG_EXTICR[4];
 	__vo uint32_t SYSCFG_CMPCR;
 }SYSCFG_RegDef_t;
 
@@ -150,14 +147,19 @@ typedef struct
 //GPIO Peripheral Clock Disable
 #define GPIO_PCLK_DI(i)   (RCC->RCC_AHB1ENR &= ~(1U << i))
 
+//SYSCFG Clock Enable
+#define SYSCFG_PCLK_EN()	(RCC->RCC_APB2ENR |= (1U<<14))
+//SYSCFG Clock Disable
+#define SYSCFG_PCLK_DI()	(RCC->RCC_APB2ENR &= ~(1U<<14))
+
 //SPI Peripheral Clock Enable
-#define SPI1_EN()	((RCC->RCC_APB2ENR) |= (1U<<12))
-#define SPI2_EN()   ((RCC->RCC_APB1ENR) |= (1U << 14))
-#define SPI3_EN()   ((RCC->RCC_APB1ENR) |= (1U << 15))
+#define SPI1_PCLK_EN()	((RCC->RCC_APB2ENR) |= (1U<<12))
+#define SPI2_PCLK_EN()  ((RCC->RCC_APB1ENR) |= (1U << 14))
+#define SPI3_PCLK_EN()  ((RCC->RCC_APB1ENR) |= (1U << 15))
 //SPI Peripheral Clock Disable
-#define SPI1_DI()	((RCC->RCC_APB2ENR) &= ~(1U<<12))
-#define SPI2_DI()   ((RCC->RCC_APB1ENR) &= ~(1U << 14))
-#define SPI3_DI()   ((RCC->RCC_APB1ENR) &= ~(1U << 15))
+#define SPI1_PCLK_DI()	((RCC->RCC_APB2ENR) &= ~(1U<<12))
+#define SPI2_PCLK_DI()  ((RCC->RCC_APB1ENR) &= ~(1U << 14))
+#define SPI3_PCLK_DI()  ((RCC->RCC_APB1ENR) &= ~(1U << 15))
 
 #define HIGH		1
 #define LOW			0

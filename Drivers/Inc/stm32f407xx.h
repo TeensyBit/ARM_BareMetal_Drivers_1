@@ -39,8 +39,15 @@
 #define NVIC_ISER(IRQ_No)	(NVIC_ISER_PTR+(IRQ_No/32))				//Example for IRQ 32, NVIC ISER will return NVIC_ISER1
 //Processor NVIC_ICER Register definitions
 #define NVIC_ICER_BASEADDR	0xE000E180
-#define NVIC_ICER_PTR		((uint32_t*)0XE000E180)
+#define NVIC_ICER_PTR		((uint32_t*)NVIC_ICER_BASEADDR)
 #define NVIC_ICER(IRQ_No)	(NVIC_ICER_PTR+(IRQ_No/32))
+//Processor NVIC_IPR Register Definitions
+#define NVIC_IPR_BASEADDR	0xE000E400
+#define NVIC_IPR_PTR		((uint32_t*)NVIC_IPR_BASEADDR)
+#define NVIC_IPR(IRQ_No)	(NVIC_IPR_PTR+(IRQ_No/4))
+
+//Processor NVIC Implemented Bits
+#define IPR_IMPLEMENTED_BITS	4
 
 //IRQ Numbers
 #define IRQNo_EXTI0     6

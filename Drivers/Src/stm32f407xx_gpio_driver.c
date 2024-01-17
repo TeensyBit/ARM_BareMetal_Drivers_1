@@ -272,3 +272,9 @@ void GPIO_IRQConfig(uint8_t IRQ_Number, uint8_t EN_DI)
 		*(NVIC_ICER(IRQ_Number)) |= (1<<IRQ_Number);
 }
 
+void GPIO_IRQPriority(uint8_t IRQ_Number, uint8_t IRQ_Priority)
+{
+	*(NVIC_IPR(IRQ_Number)) = IRQ_Priority<<(((IRQ_Number%4)*8)+(8-IPR_IMPLEMENTED_BITS));
+}
+
+

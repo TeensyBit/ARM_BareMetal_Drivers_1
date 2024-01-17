@@ -10,7 +10,7 @@
 
 #define IRQ_Cons(i)	(6+i)
 
-uint8_t returnGPIO_IRQNum(uint8_t PinNo)
+uint8_t GPIO_IRQNum(uint8_t PinNo)
 {
 	if(PinNo<=10)
 		return IRQ_Cons(PinNo);

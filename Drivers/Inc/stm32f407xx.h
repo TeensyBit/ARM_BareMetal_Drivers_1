@@ -182,6 +182,6 @@ typedef struct
 #define HIGH		1
 #define LOW			0
 
-uint8_t returnGPIO_IRQNum(uint8_t PinNo);
+uint8_t GPIO_IRQNum(uint8_t PinNo);
 
 #endif /* INC_STM32F407XX_H_ */

@@ -264,3 +264,11 @@ uint16_t GPIO_IPortRead(GPIOx_RegDef_t *pGPIOx)
 	return (pGPIOx->GPIOx_IDR);
 }
 
+void GPIO_IRQConfig(uint8_t IRQ_Number, uint8_t EN_DI)
+{
+	if(EN_DI == EN)
+		*(NVIC_ISER(IRQ_Number)) |= (1<<IRQ_Number);
+	else if(EN_DI == DI)
+		*(NVIC_ICER(IRQ_Number)) |= (1<<IRQ_Number);
+}
+

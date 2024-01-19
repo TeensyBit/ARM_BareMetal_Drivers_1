@@ -68,3 +68,18 @@
 ## Input GPIO Port
 	uint16_t <var> = GPIO_IPortRead(GPIO<A_K>, GPIO_P<0_15>)
  	uint16_t in = GPIO_IPortRead(GPIOA, GPIO_P0)
+
+## GPIO Interrupts
+### Getting the IRQ number
+	IRQNo = GPIO_IRQNum(GPIO_P<0_15>)
+	Eg: IRQNo = GPIO_IRQNum(GPIO_P0)
+### Configuring Interrupt at the required IRQ number
+	GPIO_IRQConfig(<IRQNum>,<EN_DI>)
+	Eg: GPIO_IRQConfig(GPIO_IRQNum(GPIO_P0), EN)	
+### Interrupt Priority Configuration
+ 	GPIO_IRQPriority(<GPIO_IRQNum>, IRQ_Pri_<0_15>)
+ 	Eg: GPIO_IRQPriority(GPIO_IRQNum(GPIO_P0), IRQ_Pri_0)
+### Sample Configuration
+ 	IRQNo = GPIO_IRQNum(GPIO_P0)
+ 	IRQConfig(IRQNo, EN)
+  	IRQNo = GPIO_IRQPriority(IRQNo, IRQ_Pri_0)	

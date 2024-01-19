@@ -245,7 +245,6 @@ uint8_t GPIO_IPinRead(GPIOx_RegDef_t *pGPIOx, uint8_t PinNumber)
 	return (pGPIOx->GPIOx_IDR) & (1<<PinNumber);
 }
 
-
 //	API Implementation
 /*
  * 	@function				: GPIO_IPortRead
@@ -264,6 +263,19 @@ uint16_t GPIO_IPortRead(GPIOx_RegDef_t *pGPIOx)
 	return (pGPIOx->GPIOx_IDR);
 }
 
+//	API Implementation
+/*
+ * 	@function				: GPIO_IRQConfig
+ * 	@info					: Enable/Disable interrupts on an IRQ number
+ *
+ * 	@param[in]_datatypes	: uint8_t, uint8_t
+ * 	@param[in] variables	: uint8_t IRQ_Number, uint8_t EN_DI
+ *
+ * 	@return					: void
+ *
+ * 	@notes					: Enable/Disable Interrupts on an IRQ number by setting ISER/ICER
+*/
+
 void GPIO_IRQConfig(uint8_t IRQ_Number, uint8_t EN_DI)
 {
 	if(EN_DI == EN)
@@ -272,9 +284,39 @@ void GPIO_IRQConfig(uint8_t IRQ_Number, uint8_t EN_DI)
 		*(NVIC_ICER(IRQ_Number)) |= (1<<IRQ_Number);
 }
 
+//	API Implementation
+/*
+ * 	@function				: GPIO_IRQNum
+ * 	@info					: Setting priority for IRQ number
+ *
+ * 	@param[in]_datatypes	: uint8_t, uint8_t
+ * 	@param[in] variables	: uint8_t IRQ_Number, uint8_t EN_DI
+ *
+ * 	@return					: void
+ *
+ * 	@notes					: API for setting priority for IRQ number by setting the IPR bits
+ */
+
 void GPIO_IRQPriority(uint8_t IRQ_Number, uint8_t IRQ_Priority)
 {
 	*(NVIC_IPR(IRQ_Number)) = IRQ_Priority<<(((IRQ_Number%4)*8)+(8-IPR_IMPLEMENTED_BITS));
 }
 
+//	API Implementation
+/*
+ * 	@function				: GPIO_IRQ_Handle
+ * 	@info					: API to eliminate spurious interrupts
+ *
+ * 	@param[in]_datatypes	: uint8_t, uint8_t
+ * 	@param[in] variables	: uint8_t IRQ_Number, uint8_t EN_DI
+ *
+ * 	@return					: void
+ *
+ * 	@notes					: API to eliminate spurious interrupts by setting Pending Register bits
+*/
 
+void GPIO_IRQ_Handle(uint8_t PinNo)
+{
+	if(EXTI->EXTI_PR & (1<<PinNo))
+		EXTI->EXTI_PR |= (1<<PinNo);
+}

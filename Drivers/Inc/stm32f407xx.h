@@ -46,7 +46,7 @@
 #define NVIC_IPR_PTR		((uint32_t*)NVIC_IPR_BASEADDR)
 #define NVIC_IPR(IRQ_No)	(NVIC_IPR_PTR+(IRQ_No/4))
 
-//Processor NVIC Implemented Bits
+//Processor NVIC IPR Implemented Bits
 #define IPR_IMPLEMENTED_BITS	4
 
 //IRQ Numbers
@@ -57,6 +57,24 @@
 #define IRQNo_EXTI4     10
 #define IRQNo_EXTI5_9   23   // EXTI5 to EXTI9 share the same IRQ number
 #define IRQNo_EXTI10_15 40   // EXTI10 to EXTI15 share the same IRQ number
+
+//IRQ Priorities
+#define IRQ_Pri_0   0
+#define IRQ_Pri_1   1
+#define IRQ_Pri_2   2
+#define IRQ_Pri_3   3
+#define IRQ_Pri_4   4
+#define IRQ_Pri_5   5
+#define IRQ_Pri_6   6
+#define IRQ_Pri_7   7
+#define IRQ_Pri_8   8
+#define IRQ_Pri_9   9
+#define IRQ_Pri_10  10
+#define IRQ_Pri_11  11
+#define IRQ_Pri_12  12
+#define IRQ_Pri_13  13
+#define IRQ_Pri_14  14
+#define IRQ_Pri_15  15
 
 //GPIO Base Addresses on AHB1
 #define GPIOA_BASEADDR	AHB1_BASEADDR

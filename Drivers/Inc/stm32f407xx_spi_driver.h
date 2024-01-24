@@ -15,9 +15,10 @@
 #define SPI_MSTR	1
 
 //SPI_BusConf
-#define SPI_FULL	0
-#define SPI_HALF	1
-#define SPI_SIMP	2
+#define SPI_FULL		0
+#define SPI_HALF		1
+#define SPI_SIMP_TX		2
+#define SPI_SIMP_RX		3
 
 //SPI_Data Frame
 #define SPI_8BIT	0
@@ -45,6 +46,21 @@
 #define SPI_BRDIV_128	6
 #define SPI_BRDIV_256	7
 
+//SPI_CR1 Register
+#define SPI_CR1_CPHA		0
+#define SPI_CR1_CPOL		1
+#define SPI_CR1_MSTR    	2
+#define SPI_CR1_BR      	3
+#define SPI_CR1_SPE     	6
+#define SPI_CR1_LSBFIRST    7
+#define SPI_CR1_SSI     	8
+#define SPI_CR1_SSM     	9
+#define SPI_CR1_RXONLY  	10
+#define SPI_CR1_DFF     	11
+#define SPI_CR1_CRCNEXT 	12
+#define SPI_CR1_CRCEN   	13
+#define SPI_CR1_BIDIOE  	14
+#define SPI_CR1_BIDIMODE    15
 
 typedef struct
 {

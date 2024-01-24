@@ -30,4 +30,44 @@ void SPI_Init(SPIx_Handler_t *pSPIx_Handle)
 	//Master/Slave Configuration
 	pSPIx_Handle->pSPIx->SPI_CR1 &= (1<<2);
 	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->SPI_Mode)<<2);
+
+	/* SPI Bus Configuration
+	 * Full-Duplex: Also called 2 line bi-directional mode
+	 * Half-Duplex: 1 line bi-directional mode, Setting the BIDIOE bit determines between Tx/Rx
+	 * Simplex:  Tx only - Disconnect MISO line in Full-Duplex communication
+	 * 			 Rx only - Unidirectional Rx Only mode (BIDIMODE=0;RXONLY=1)
+	 */
+
+	if(temp->SPI_BusConf == SPI_FULL || temp->SPI_BusConf == SPI_SIMP_TX)	//BIDIMODE=0;RXONLY=0
+	{
+		pSPIx_Handle->pSPIx->SPI_CR1 &= ~(1<<SPI_CR1_BIDIMODE);		//Clear BIDIMODE
+		pSPIx_Handle->pSPIx->SPI_CR1 &= ~(1<<SPI_CR1_RXONLY);		//Clear RXONLY
+	}
+	else if(temp->SPI_BusConf == SPI_SIMP_RX)
+	{
+		pSPIx_Handle->pSPIx->SPI_CR1 &= ~(1<<SPI_CR1_BIDIMODE);		//Clear BIDIMODE
+		pSPIx_Handle->pSPIx->SPI_CR1 |= ~(1<<SPI_CR1_RXONLY);		//Set RXONLY
+	}
+	else if(temp->SPI_BusConf == SPI_HALF)				//Set BIDIOE in the Application
+		pSPIx_Handle->pSPIx->SPI_CR1 |= (1<<SPI_CR1_BIDIMODE);
+
+	//SPI Data Frame Format
+	pSPIx_Handle->pSPIx->SPI_CR1 &= ~(1<<11);
+	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->SPI_DataFrm)<<SPI_CR1_DFF);
+
+	//SPI Peripheral Clock Polarity
+	pSPIx_Handle->pSPIx->SPI_CR1 &= ~(1<<1);
+	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->SPI_ClkPol)<<SPI_CR1_CPOL);
+
+	//SPI Peripheral Clock Phase
+	pSPIx_Handle->pSPIx->SPI_CR1 &= ~(1<<SPI_CR1_CPHA);
+	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->SPI_ClkPha)<<SPI_CR1_CPHA);
+
+	//Software Slave Management
+	if(temp->SPI_SoftMgmt)
+		pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->SPI_SoftMgmt)<<SPI_CR1_SSM);
+
+	//Baud Rate Configuration
+	pSPIx_Handle->pSPIx->SPI_CR1 &= ~(7<<SPI_CR1_BR);
+	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->BaudCtrl)<<SPI_CR1_BR);
 }

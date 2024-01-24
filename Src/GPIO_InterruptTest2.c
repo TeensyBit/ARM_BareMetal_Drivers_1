@@ -2,7 +2,6 @@
 #include "stm32f407xx.h"
 #include "stm32f407xx_gpio_driver.h"
 
-
 void GPIO_Config(GPIOx_Handler_t* gpio, GPIOx_RegDef_t* GPIOx, uint8_t GPIO_PinNo, uint8_t GPIO_PinMode);
 void EXTI1_IRQHandler(void);
 

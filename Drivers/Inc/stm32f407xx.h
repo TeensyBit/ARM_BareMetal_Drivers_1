@@ -207,12 +207,12 @@ typedef struct
 }SPIx_RegDef_t;
 
 //SPI Macro
-#define SPI1    ((SPI_RegDef_t*)SPI1_BASEADDR)
-#define SPI2    ((SPI_RegDef_t*)SPI2_BASEADDR)
-#define SPI3    ((SPI_RegDef_t*)SPI3_BASEADDR)
-#define SPI4    ((SPI_RegDef_t*)SPI4_BASEADDR)
-#define SPI5    ((SPI_RegDef_t*)SPI5_BASEADDR)
-#define SPI6    ((SPI_RegDef_t*)SPI6_BASEADDR)
+#define SPI1    ((SPIx_RegDef_t*)SPI1_BASEADDR)
+#define SPI2    ((SPIx_RegDef_t*)SPI2_BASEADDR)
+#define SPI3    ((SPIx_RegDef_t*)SPI3_BASEADDR)
+#define SPI4    ((SPIx_RegDef_t*)SPI4_BASEADDR)
+#define SPI5    ((SPIx_RegDef_t*)SPI5_BASEADDR)
+#define SPI6    ((SPIx_RegDef_t*)SPI6_BASEADDR)
 
 //GPIO Peripheral Clock Enables
 #define GPIO_PCLK_EN(i)	  (RCC->RCC_AHB1ENR |= (1U << i))
@@ -236,6 +236,10 @@ typedef struct
 
 #define HIGH		1
 #define LOW			0
+
+//EN_DI
+#define EN	1
+#define DI	0
 
 uint8_t GPIO_IRQNum(uint8_t PinNo);
 

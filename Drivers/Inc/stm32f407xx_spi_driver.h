@@ -8,6 +8,8 @@
 #ifndef INC_STM32F407XX_SPI_DRIVER_H_
 #define INC_STM32F407XX_SPI_DRIVER_H_
 
+#include "stm32f407xx.h"
+
 //SPI_Mode
 #define SPI_SLAV	0
 #define SPI_MSTR	1
@@ -62,8 +64,8 @@ typedef struct
 }SPIx_Handler_t;
 
 //API Prototypes
-void GPIO_PCLK_Ctrl(GPIOx_RegDef_t *pGPIOx, uint8_t EN_DI);
-void SPI_Init(void);
+void SPI_PCLK_Ctrl(SPIx_RegDef_t *pSPIx, uint8_t EN_DI);
+void SPI_Init(SPIx_Handler_t *pSPIx_Handle);
 void SPI_DeInit(void);
 void SPI_TxData(void);
 void SPI_RxData(void);

@@ -108,10 +108,6 @@ typedef struct
  * GPIO_ToggleOPins
  */
 
-//EN_DI
-#define EN	1
-#define DI	0
-
 void GPIO_PCLK_Ctrl(GPIOx_RegDef_t *pGPIOx, uint8_t EN_DI);
 void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle);
 void GPIO_DeInit(GPIOx_RegDef_t *pGPIOx);

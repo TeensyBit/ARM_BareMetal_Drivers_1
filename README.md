@@ -83,3 +83,22 @@
  	IRQNo = GPIO_IRQNum(GPIO_P0)
  	IRQConfig(IRQNo, EN)
   	IRQNo = GPIO_IRQPriority(IRQNo, IRQ_Pri_0)	
+
+# SPI Documentation
+
+## Setting up the SPI Handler
+	SPIx_Handler_t <Handle>
+	<Handle>.pSPIx = SPI<1_3>
+### Example:
+	SPIx_Handler_t spi
+ 	spi.pSPIx = SPI1
+
+## Setting Master/Slave configuration for SPI
+	<Handle>.SPI_PinConfig.SPI_Mode = SPI_<MSTR/SLAVE>
+ 	Eg: spi.SPI_PinConfig.SPI_Mode = SPI_MSTR
+## Enabling Peripheral Clock for the corresponding SPI
+	SPI_PCLK_Ctrl(<Handle>.pSPIx, <EN_DI>)
+ 	Eg: SPI_PCLK_Ctrl(spi.pSPIx, EN)
+## Initializing SPI with the selected configuration
+	SPI_Init(&<Handle>)
+	Eg: SPI_Init(&spi)

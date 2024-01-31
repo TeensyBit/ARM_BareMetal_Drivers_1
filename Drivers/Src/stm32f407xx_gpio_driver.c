@@ -161,15 +161,15 @@ uint8_t PortCode(GPIOx_RegDef_t *pGPIOx)
 
 void GPIO_DeInit(GPIOx_RegDef_t* pGPIOx)
 {
-	if (pGPIOx == GPIOA) GPIO_RST(0);
-	else if (pGPIOx == GPIOB) GPIO_RST(1);
-	else if (pGPIOx == GPIOC) GPIO_RST(2);
-	else if (pGPIOx == GPIOD) GPIO_RST(3);
-	else if (pGPIOx == GPIOE) GPIO_RST(4);
-	else if (pGPIOx == GPIOF) GPIO_RST(5);
-	else if (pGPIOx == GPIOG) GPIO_RST(6);
-	else if (pGPIOx == GPIOH) GPIO_RST(7);
-	else if (pGPIOx == GPIOI) GPIO_RST(8);
+	if(pGPIOx == GPIOA) GPIO_RST(0);
+	else if(pGPIOx == GPIOB) GPIO_RST(1);
+	else if(pGPIOx == GPIOC) GPIO_RST(2);
+	else if(pGPIOx == GPIOD) GPIO_RST(3);
+	else if(pGPIOx == GPIOE) GPIO_RST(4);
+	else if(pGPIOx == GPIOF) GPIO_RST(5);
+	else if(pGPIOx == GPIOG) GPIO_RST(6);
+	else if(pGPIOx == GPIOH) GPIO_RST(7);
+	else if(pGPIOx == GPIOI) GPIO_RST(8);
 }
 
 //	API Implementation

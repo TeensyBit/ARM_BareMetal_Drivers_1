@@ -71,3 +71,24 @@ void SPI_Init(SPIx_Handler_t *pSPIx_Handle)
 	pSPIx_Handle->pSPIx->SPI_CR1 &= ~(7<<SPI_CR1_BR);
 	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->BaudCtrl)<<SPI_CR1_BR);
 }
+
+void SPI_DeInit(SPIx_RegDef_t* pSPIx)
+{
+	if(pSPIx == SPI1) SPI_RST(1);
+	else if(pSPIx == SPI2) SPI_RST(2);
+	else if(pSPIx == SPI3) SPI_RST(3);
+}
+
+void SPI_RST(uint8_t i)
+{
+	if(i==1)
+	{
+		(RCC->RCC_APB2RSTR) |= (1<<SPI_RST_OFF);
+		(RCC->RCC_APB2RSTR) &= ~(1<<SPI_RST_OFF);
+	}
+	else
+	{
+		(RCC->RCC_APB1RSTR) |= (1<<(SPI_RST_OFF+i));
+		(RCC->RCC_APB1RSTR) &= ~(1<<(SPI_RST_OFF+i));
+	}
+}

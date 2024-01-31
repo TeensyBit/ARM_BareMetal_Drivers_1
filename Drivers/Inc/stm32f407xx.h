@@ -93,9 +93,6 @@
 #define SPI1_BASEADDR	(APB2_BASEADDR + 0x3000)
 #define SPI2_BASEADDR	(APB1_BASEADDR + 0x3800)
 #define SPI3_BASEADDR	(APB1_BASEADDR + 0x3C00)
-#define SPI4_BASEADDR	(APB2_BASEADDR + 0x3400)
-#define SPI5_BASEADDR	(APB2_BASEADDR + 0x5000)
-#define SPI6_BASEADDR	(APB2_BASEADDR + 0x5400)
 
 //RCC Base Address on AHB1
 #define RCC_BASEADDR		(AHB1_BASEADDR+0x3800)
@@ -210,9 +207,6 @@ typedef struct
 #define SPI1    ((SPIx_RegDef_t*)SPI1_BASEADDR)
 #define SPI2    ((SPIx_RegDef_t*)SPI2_BASEADDR)
 #define SPI3    ((SPIx_RegDef_t*)SPI3_BASEADDR)
-#define SPI4    ((SPIx_RegDef_t*)SPI4_BASEADDR)
-#define SPI5    ((SPIx_RegDef_t*)SPI5_BASEADDR)
-#define SPI6    ((SPIx_RegDef_t*)SPI6_BASEADDR)
 
 //GPIO Peripheral Clock Enables
 #define GPIO_PCLK_EN(i)	  (RCC->RCC_AHB1ENR |= (1U << i))

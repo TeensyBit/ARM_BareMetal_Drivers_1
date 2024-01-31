@@ -62,6 +62,9 @@
 #define SPI_CR1_BIDIOE  	14
 #define SPI_CR1_BIDIMODE    15
 
+//SPI Reset
+#define SPI_RST_OFF			12		//SPI1_RST = 12-APB2RSTR;SPI<2_3>_RST = 12+(<2_3>)-AHB2RSTR;
+
 typedef struct
 {
 	uint8_t SPI_Mode;			//Master/Slave
@@ -82,7 +85,8 @@ typedef struct
 //API Prototypes
 void SPI_PCLK_Ctrl(SPIx_RegDef_t *pSPIx, uint8_t EN_DI);
 void SPI_Init(SPIx_Handler_t *pSPIx_Handle);
-void SPI_DeInit(void);
+void SPI_DeInit(SPIx_RegDef_t *pSPIx);
+void SPI_RST(uint8_t i);
 void SPI_TxData(void);
 void SPI_RxData(void);
 

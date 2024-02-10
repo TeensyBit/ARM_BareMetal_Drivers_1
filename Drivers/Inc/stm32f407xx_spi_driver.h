@@ -62,6 +62,17 @@
 #define SPI_CR1_BIDIOE  	14
 #define SPI_CR1_BIDIMODE    15
 
+//SPI_SR Register
+#define SPI_SR_RXNE			0 // Receive buffer not empty
+#define SPI_SR_TXE			1 // Transmit buffer empty
+#define SPI_SR_CHSIDE		2 // Channel side
+#define SPI_SR_UDR			3 // Underrun flag
+#define SPI_SR_CRCERR		4 // CRC error flag
+#define SPI_SR_MODF			5 // Mode fault
+#define SPI_SR_OVR			6 // Overrun flag
+#define SPI_SR_BSY			7 // Busy flag
+#define SPI_SR_FRE			8 // TI frame format error
+
 //SPI Reset
 #define SPI_RST_OFF			12		//SPI1_RST = 12-APB2RSTR;SPI<2_3>_RST = 12+(<2_3>)-AHB2RSTR;
 
@@ -87,7 +98,7 @@ void SPI_PCLK_Ctrl(SPIx_RegDef_t *pSPIx, uint8_t EN_DI);
 void SPI_Init(SPIx_Handler_t *pSPIx_Handle);
 void SPI_DeInit(SPIx_RegDef_t *pSPIx);
 void SPI_RST(uint8_t i);
-void SPI_TxData(void);
+void SPI_TxDataB(SPIx_RegDef_t *pSPIx, uint8_t *pTxBuff, uint32_t len);
 void SPI_RxData(void);
 
 #endif /* INC_STM32F407XX_SPI_DRIVER_H_ */

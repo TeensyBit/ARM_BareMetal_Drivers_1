@@ -92,3 +92,30 @@ void SPI_RST(uint8_t i)
 		(RCC->RCC_APB1RSTR) &= ~(1<<(SPI_RST_OFF+i));
 	}
 }
+
+void SPI_TxDataB(SPIx_RegDef_t *pSPIx, uint8_t *pTxBuff, uint32_t len)
+{
+	/*
+	 * Wait until TXE bit is SET
+	 * Check if the Data Frame format is 8/16 bit
+	 * Paste 8/16 bit data to he register
+	 */
+	while(len)			//len should be an even number
+	{
+		if((pSPIx->SPI_SR)&(1<<SPI_SR_TXE))
+		{
+			if((pSPIx->SPI_CR1)&(1<<SPI_CR1_DFF))
+			{
+				pSPIx->SPI_DR = *(uint16_t*)pTxBuff;
+				pTxBuff++;
+				len -= 2;
+			}
+			else
+			{
+				pSPIx->SPI_DR = *pTxBuff;
+				pTxBuff++;
+				len--;
+			}
+		}
+	}
+}

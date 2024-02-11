@@ -29,7 +29,7 @@ void SPI_Init(SPIx_Handler_t *pSPIx_Handle)
 
 	//Master/Slave Configuration
 	pSPIx_Handle->pSPIx->SPI_CR1 &= (1<<2);
-	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->SPI_Mode)<<2);
+	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->SPI_Mode)<<SPI_CR1_MSTR);
 
 	/* SPI Bus Configuration
 	 * Full-Duplex: Also called 2 line bi-directional mode
@@ -56,7 +56,7 @@ void SPI_Init(SPIx_Handler_t *pSPIx_Handle)
 	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->SPI_DataFrm)<<SPI_CR1_DFF);
 
 	//SPI Peripheral Clock Polarity
-	pSPIx_Handle->pSPIx->SPI_CR1 &= ~(1<<1);
+	pSPIx_Handle->pSPIx->SPI_CR1 &= ~(1<<SPI_CR1_CPOL);
 	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->SPI_ClkPol)<<SPI_CR1_CPOL);
 
 	//SPI Peripheral Clock Phase
@@ -97,7 +97,6 @@ void SPI_TxDataB(SPIx_RegDef_t *pSPIx, uint8_t *pTxBuff, uint32_t len)
 {
 	//Enable SPI
 	pSPIx->SPI_CR1 |= (1<<SPI_CR1_SPE);
-
 	/*
 	 * Wait until TXE bit is SET
 	 * Check if the Data Frame format is 8/16 bit
@@ -122,9 +121,14 @@ void SPI_TxDataB(SPIx_RegDef_t *pSPIx, uint8_t *pTxBuff, uint32_t len)
 		}
 	}
 	while(!((pSPIx->SPI_SR)&(1<<SPI_SR_TXE)) && ((pSPIx->SPI_SR)&(1<<SPI_SR_BSY)));
-
 	//Diable SPI
-	pSPIx->SPI_CR1 |= (1<<SPI_CR1_SPE);
+	pSPIx->SPI_CR1 &= ~(1<<SPI_CR1_SPE);
 }
 
-
+void SPI_SSIconfig(SPIx_RegDef_t *pSPIx, uint8_t EN_DI)
+{
+	if(EN_DI==EN)
+		(pSPIx->SPI_CR1) |= (1<<SPI_CR1_SSI);
+	else if(EN_DI==DI)
+		(pSPIx->SPI_CR1) &= ~(1<<SPI_CR1_SSI);
+}

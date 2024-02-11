@@ -128,7 +128,7 @@ void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle)
 	//PinMode Alternate Function - AF0_15
 	uint8_t L_H = (temp->GPIO_PinNo)/8;
 	pGPIOx_Handle->pGPIOx->GPIOx_AFR[L_H] &= ~(0xF<<(4*(temp->GPIO_PinNo)));
-	pGPIOx_Handle->pGPIOx->GPIOx_AFR[L_H] &= ~(((temp->GPIO_PinAF)%8)<<(4*(temp->GPIO_PinNo)));
+	pGPIOx_Handle->pGPIOx->GPIOx_AFR[L_H] |= (((temp->GPIO_PinAF)%8)<<(4*(temp->GPIO_PinNo)));
 }
 
 uint8_t PortCode(GPIOx_RegDef_t *pGPIOx)

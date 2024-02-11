@@ -192,15 +192,15 @@ typedef struct
 //SPI Register Structure
 typedef struct
 {
-	uint32_t SPI_CR1;
-	uint32_t SPI_CR2;
-	uint32_t SPI_SR;
-	uint32_t SPI_DR;
-	uint32_t SPI_CRCPR;
-	uint32_t SPI_RXCRCR;
-	uint32_t SPI_TXCRCR;
-	uint32_t SPI_I2SCFGR;
-	uint32_t SPI_I2SPR;
+	__vo uint32_t SPI_CR1;
+	__vo uint32_t SPI_CR2;
+	__vo uint32_t SPI_SR;
+	__vo uint32_t SPI_DR;
+	__vo uint32_t SPI_CRCPR;
+	__vo uint32_t SPI_RXCRCR;
+	__vo uint32_t SPI_TXCRCR;
+	__vo uint32_t SPI_I2SCFGR;
+	__vo uint32_t SPI_I2SPR;
 }SPIx_RegDef_t;
 
 //SPI Macro

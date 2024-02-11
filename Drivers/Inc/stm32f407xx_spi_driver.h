@@ -33,8 +33,8 @@
 #define SPI_CLKPH1	1
 
 //SPI_SoftMgmt
-#define SPI_SOFT	0
-#define SPI_HARD	1
+#define SPI_HARD	0
+#define SPI_SOFT	1
 
 //SPI_BaudCtrl
 #define SPI_BRDIV_2		0
@@ -98,6 +98,7 @@ void SPI_PCLK_Ctrl(SPIx_RegDef_t *pSPIx, uint8_t EN_DI);
 void SPI_Init(SPIx_Handler_t *pSPIx_Handle);
 void SPI_DeInit(SPIx_RegDef_t *pSPIx);
 void SPI_RST(uint8_t i);
+void SPI_SSIconfig(SPIx_RegDef_t *pSPIx, uint8_t EN_DI);
 void SPI_TxDataB(SPIx_RegDef_t *pSPIx, uint8_t *pTxBuff, uint32_t len);
 void SPI_RxData(void);
 

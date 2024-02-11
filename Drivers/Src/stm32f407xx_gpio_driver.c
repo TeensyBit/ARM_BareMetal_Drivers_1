@@ -69,7 +69,7 @@ void GPIO_PCLK_Ctrl(GPIOx_RegDef_t *pGPIOx, uint8_t EN_DI)
 void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle)
 {
 	GPIO_PinConfig_t *temp =  &(pGPIOx_Handle->GPIO_PinConfig);
-	if((temp->GPIO_PinMode)<=GPIO_AN)
+	if((temp->GPIO_PinMode)<=GPIO_MODE_AN)
 	{
 		//Setting PinMode - Input/Output/AlternateFunc/Analog
 		pGPIOx_Handle->pGPIOx->GPIOx_MODER &= ~(0x3<<(2*(temp->GPIO_PinNo)));					//Clear corresponding bits in the MODER Register
@@ -83,17 +83,17 @@ void GPIO_Init(GPIOx_Handler_t* pGPIOx_Handle)
 		 * Enable the interrupt request by writing a ‘1’ to the corresponding bit in the IMR
 		 */
 
-		if((temp->GPIO_PinMode)==GPIO_IT_RT)
+		if((temp->GPIO_PinMode)==GPIO_MODE_ITRT)
 		{
 			(EXTI->EXTI_RTSR) &= ~(1<<(temp->GPIO_PinNo));
 			(EXTI->EXTI_RTSR) |= (1<<(temp->GPIO_PinNo));
 		}
-		else if((temp->GPIO_PinMode)==GPIO_IT_FT)
+		else if((temp->GPIO_PinMode)==GPIO_MODE_ITFT)
 		{
 			(EXTI->EXTI_FTSR) &= ~(1<<(temp->GPIO_PinNo));
 			(EXTI->EXTI_FTSR) |= (1<<(temp->GPIO_PinNo));
 		}
-		else if((temp->GPIO_PinMode)==GPIO_IT_RFT)
+		else if((temp->GPIO_PinMode)==GPIO_MODE_ITRFT)
 		{
 			(EXTI->EXTI_RTSR) &= ~(1<<(temp->GPIO_PinNo));
 			(EXTI->EXTI_RTSR) |= (1<<(temp->GPIO_PinNo));

@@ -69,7 +69,7 @@ void SPI_Init(SPIx_Handler_t *pSPIx_Handle)
 
 	//Baud Rate Configuration
 	pSPIx_Handle->pSPIx->SPI_CR1 &= ~(7<<SPI_CR1_BR);
-	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->BaudCtrl)<<SPI_CR1_BR);
+	pSPIx_Handle->pSPIx->SPI_CR1 |= ((temp->SPI_BaudCtrl)<<SPI_CR1_BR);
 }
 
 void SPI_DeInit(SPIx_RegDef_t* pSPIx)
@@ -95,6 +95,9 @@ void SPI_RST(uint8_t i)
 
 void SPI_TxDataB(SPIx_RegDef_t *pSPIx, uint8_t *pTxBuff, uint32_t len)
 {
+	//Enable SPI
+	pSPIx->SPI_CR1 |= (1<<SPI_CR1_SPE);
+
 	/*
 	 * Wait until TXE bit is SET
 	 * Check if the Data Frame format is 8/16 bit
@@ -118,4 +121,10 @@ void SPI_TxDataB(SPIx_RegDef_t *pSPIx, uint8_t *pTxBuff, uint32_t len)
 			}
 		}
 	}
+	while(!((pSPIx->SPI_SR)&(1<<SPI_SR_TXE)) && ((pSPIx->SPI_SR)&(1<<SPI_SR_BSY)));
+
+	//Diable SPI
+	pSPIx->SPI_CR1 |= (1<<SPI_CR1_SPE);
 }
+
+

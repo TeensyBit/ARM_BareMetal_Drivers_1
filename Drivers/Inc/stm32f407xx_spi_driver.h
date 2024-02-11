@@ -29,8 +29,8 @@
 #define SPI_CLKPO1	1
 
 //SPI_ClkPha
-#define SPI_CLKPH1	0
-#define SPI_CLKPH2	1
+#define SPI_CLKPH0	0
+#define SPI_CLKPH1	1
 
 //SPI_SoftMgmt
 #define SPI_SOFT	0
@@ -79,12 +79,12 @@
 typedef struct
 {
 	uint8_t SPI_Mode;			//Master/Slave
-	uint8_t SPI_BusConf;		//Full/Half - Duplex/ Simplex
+	uint8_t SPI_BusConf;		//Full/Half - Duplex/Simplex
 	uint8_t SPI_DataFrm;		//8/16 bit
 	uint8_t SPI_ClkPol;			//Clock Polarity
 	uint8_t SPI_ClkPha;			//Clock Phase
 	uint8_t SPI_SoftMgmt;		//SSM bit
-	uint8_t BaudCtrl;			//BaudRate Control
+	uint8_t SPI_BaudCtrl;			//BaudRate Control
 }SPI_PinConfig_t;
 
 typedef struct
